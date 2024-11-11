@@ -17,7 +17,7 @@ class Assistant:
 		self.task_llm = "llama-3.1-70b-versatile"
 
 		try:
-			with open("meta_prompt.md", "r", encoding="utf-8") as file:
+			with open("metaprompt.md", "r", encoding="utf-8") as file:
 				self.meta_prompt = file.read()
 		except Exception as e:
 			st.error(f"Error loading meta_prompt.md: {str(e)}")
