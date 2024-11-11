@@ -3,3 +3,6 @@ llmlingua
 streamlit
 audio_recorder_streamlit
 pydub
+torch
+torchvision
+torchaudio
