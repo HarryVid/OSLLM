@@ -134,7 +134,8 @@ def init_session_state():
 		"input_mode": "type",
 		"compressor": PromptCompressor(
 			model_name="microsoft/llmlingua-2-xlm-roberta-large-meetingbank",
-			use_llmlingua2=True
+			use_llmlingua2=True,
+			device_map="cpu"
 		)
 	}
 	for key, value in defaults.items():
