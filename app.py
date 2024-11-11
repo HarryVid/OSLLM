@@ -13,8 +13,8 @@ class Assistant:
 	def __init__(self):
 		self.api_key = "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"
 		self.client = groq.Groq(api_key=self.api_key)
-		self.meta_llm = "llama-3.2-90b-vision-preview"
-		self.task_llm = "llama-3.2-90b-vision-preview"
+		self.meta_llm = "llama-3.1-70b-versatile"
+		self.task_llm = "llama-3.1-70b-versatile"
 
 		try:
 			with open("meta_prompt.md", "r", encoding="utf-8") as file:
@@ -53,9 +53,10 @@ class Assistant:
 				model=self.meta_llm,
 				messages=[
 					{"role": "system", "content": self.meta_prompt},
-					{"role": "user", "content": f"Generate an appropriate system prompt for an LLM to handle this user request: {user_prompt}"},
+					{"role": "user", "content": f"Generate an appropriate system prompt for an LLM to handle this user request/task: {user_prompt}"},
 				],
 				temperature=0.2,
+				top_p=0.2,
 			)
 			return response.choices[0].message.content
 		except Exception as e:
@@ -75,6 +76,7 @@ class Assistant:
 					{"role": "user", "content": final_prompt},
 				],
 				temperature=0.2,
+				top_p=0.2
 			)
 			return response.choices[0].message.content
 		except Exception as e:
@@ -134,8 +136,7 @@ def init_session_state():
 		"input_mode": "type",
 		"compressor": PromptCompressor(
 			model_name="microsoft/llmlingua-2-xlm-roberta-large-meetingbank",
-			use_llmlingua2=True,
-			device_map="cpu"
+			use_llmlingua2=True
 		)
 	}
 	for key, value in defaults.items():
